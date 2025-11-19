@@ -1,0 +1,34 @@
+<div *ngIf="movieAndItsCharacters$ | async as data">
+
+  <div class="movie-character-details">
+
+    <div *ngIf="!data.movie; else movie" class="spinner-container">
+      <mat-spinner></mat-spinner>
+    </div>
+
+    <ng-template #movie>
+      <div class="movie-details-head">
+        <h2 class="title">{{ data.movie?.title }}</h2>
+        <h4 class="date">{{ data.movie?.release_date | date:'yyyy' }}</h4>
+        <div class="opening-crawl">
+          <p>{{ data.movie?.opening_crawl }}</p>
+        </div>
+      </div>
+    </ng-template>
+
+    <div *ngIf="loadingCharacters$ | async; else characters" class="spinner-container">
+      <mat-spinner></mat-spinner>
+    </div>
+
+    <ng-template #characters>
+      <h3>Characters:</h3>
+
+      <div class="movies-characters">
+        <div class="movie-character" *ngFor="let movieCharacter of data.characters"
+          (click)="fetchSingleCharacter(movieCharacter.url)">
+          <p>{{movieCharacter.name}}</p>
+        </div>
+      </div>
+    </ng-template>
+  </div>
+</div>

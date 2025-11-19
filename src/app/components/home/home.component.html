@@ -1,0 +1,14 @@
+<h1>Movies...</h1>
+<div *ngIf="(movies$ | async)?.length ===0; else movies" class="spinner-container">
+  <mat-spinner></mat-spinner>
+</div>
+
+<ng-template #movies>
+  <div class="movies-flex">
+    <div *ngFor="let movie of movies$ | async" (click)="fetchSingleMovie(movie.url)" class="movie-item">
+      <div class="number">{{ movie.id }}</div>
+      <div class="title">{{ movie.title }}</div>
+      <div class="date"><span>from: </span>{{ movie.release_date | date:'yyyy' }}</div>
+    </div>
+  </div>
+</ng-template>

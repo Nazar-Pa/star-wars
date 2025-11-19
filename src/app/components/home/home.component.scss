@@ -1,0 +1,52 @@
+h1 {
+  background-color: rgb(235, 246, 164);
+  font-size: 50px;
+  padding: 20px;
+  text-align: center;
+  margin: 5px 0;
+}
+
+.movies-flex {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+
+  .movie-item {
+    display: flex;
+    background: linear-gradient(#1b1a1a, #000000);
+    color: rgb(255, 255, 255);
+    height: 110px;
+    font-size: 40px;
+    font-weight: 600;
+    align-items: center;
+    transition: all .2s ease-in-out;
+    cursor: pointer;
+
+    &:hover {
+      transform: scale(1.1);
+      margin: 3px 0;
+      box-shadow: rgba(100, 100, 111, 0.9) 0px 7px 29px 0px;
+    }
+
+    & * {
+      margin: 20px;
+    }
+
+    .number {
+      font-size: 50px;
+      margin: 40px;
+    }
+  
+    .title {
+      font-weight: 700;
+      font-style: italic;
+    }
+  
+    .date {
+      span {
+        font-size: 20px;
+        color: rgb(235, 246, 164);
+      }
+    }
+  }
+}
