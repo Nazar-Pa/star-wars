@@ -1,59 +1,49 @@
-# StarWars2
+# 🎬 Angular Star Wars Movies App  
+### A Fully Scalable NgRx State Management Project
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.3.
+This is an Angular application that fetches **Star Wars movies and characters** from an API and manages all data using a **fully architecture-driven NgRx setup**.  
+It demonstrates real-world NgRx patterns including:
 
-## Development server
+- Feature-based store structure  
+- Entity adapters (NgRx Entity)  
+- Strongly typed selectors  
+- Smart effects with side-effects and API calls  
+- Facade design pattern  
+- Loading state management  
+- Missing data hydration (fetch only missing characters)  
 
-To start a local development server, run:
+This project is structured to match professional enterprise Angular applications.
 
-```bash
-ng serve
-```
+---
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+## 🚀 Features
 
-## Code scaffolding
+- Retrieve a list of Star Wars movies  
+- View full details about a selected movie  
+- Automatically load characters related to the movie  
+- Fetch **only characters not already present in the store**  
+- Display loading spinners until movie/character data is fully loaded  
+- Full NgRx architecture with feature modules  
+- Clean, reusable, and scalable facade layer  
+- Entity-based state (fast lookups, efficient updates)
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+---
 
-```bash
-ng generate component component-name
-```
+## 🛠️ Tech Stack
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+| Tech | Purpose |
+|------|---------|
+| **Angular** | Frontend framework |
+| **NgRx Store** | State container |
+| **NgRx Effects** | API side-effects |
+| **NgRx Entity** | Efficient normalized collections |
+| **NgRx Selectors** | Performant state querying |
+| **Facade Pattern** | Clean component store access |
+| **Angular Material** | UI components (spinner, cards, etc.) |
 
-```bash
-ng generate --help
-```
+---
 
-## Building
+## 🧱 Architecture Overview
 
-To build the project run:
+This project follows a **feature-based folder structure**:
 
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
