@@ -1,8 +1,8 @@
 import { HttpClient } from "@angular/common/http";
 import { inject, Injectable } from "@angular/core";
 import { map, Observable, of, switchMap } from "rxjs";
-import { Character } from "./character.model";
-import { Movie } from "./movie.model";
+import { Character } from "../../features/movies/models/character.model";
+import { Movie } from "../../features/movies/models/movie.model";
 
 @Injectable({
   providedIn: 'root'
@@ -12,8 +12,28 @@ export class MoviesService {
   private baseUrl = 'https://swapi.dev/api/'
   private http = inject(HttpClient);
 
-  fetchMovies() {
+  fetchMovies2() {
     return this.http.get<any>(`${this.baseUrl}films`)
+  }
+
+  fetchMovies() {
+    return this.http.get<any>(`${this.baseUrl}films`).pipe(
+      map(response => {
+                  const movies: Movie[] = response?.results?.reduce((list: Movie[], movie: any, index: number) => {
+                    const { title, opening_crawl, characters, release_date, url } = movie;
+                    list.push({
+                      id: index + 1,
+                      title,
+                      opening_crawl,
+                      release_date,
+                      characterIds: this.extractIDs(characters, 'people'),
+                      url
+                    })
+                    return list;
+                  }, [])
+                  return movies
+                })
+    )
   }
 
   fetchSingleMovie(id: number): Observable<Movie> {

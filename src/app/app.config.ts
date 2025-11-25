@@ -2,11 +2,11 @@ import { ApplicationConfig, isDevMode, provideZoneChangeDetection } from '@angul
 import { provideRouter } from '@angular/router';
 
 import { routes } from './app.routes';
-import { MovieEffects } from './store/movies.effects';
+import { MovieEffects } from './features/movies/store/movies.effects';
 import { provideEffects } from '@ngrx/effects';
 import { provideState, provideStore } from '@ngrx/store';
 import { provideHttpClient } from '@angular/common/http';
-import { movieReducer } from './store/movies.reducers';
+import { movieReducer, reducers } from './features/movies/store/movies.reducers';
 import { provideStoreDevtools } from '@ngrx/store-devtools';
 
 export const appConfig: ApplicationConfig = {
@@ -14,8 +14,9 @@ export const appConfig: ApplicationConfig = {
     provideZoneChangeDetection({ eventCoalescing: true }), 
     provideRouter(routes),
     provideHttpClient(),
-    provideStore(),
-    provideState({ name: 'appState', reducer: movieReducer }),
+    provideStore(reducers),
+    // provideState({ name: 'appState', reducer: movieReducer }),
+    // provideState(reducers),
     provideEffects(MovieEffects),
     provideStoreDevtools({
       maxAge: 25,

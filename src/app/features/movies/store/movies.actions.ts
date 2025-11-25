@@ -1,6 +1,6 @@
 import { createAction, props } from '@ngrx/store';
-import { Movie } from '../movie.model';
-import { Character } from '../character.model';
+import { Movie } from '../models/movie.model';
+import { Character } from '../models/character.model';
 
 export const startFetchingMovies = createAction(
   '[Movies] Start Fetching Movies'

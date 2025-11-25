@@ -5,9 +5,11 @@ import { startFetchingMovies } from '../../store/movies.actions';
 import { Observable } from 'rxjs';
 import { AsyncPipe, DatePipe, NgFor, NgIf } from '@angular/common';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { Movie } from '../../movie.model';
+import { Movie } from '../../models/movie.model';
 import { Router } from '@angular/router';
-import { MoviesService } from '../../movies.service';
+import { MoviesService } from '../../../../core/services/movies.service';
+import { selectAllMovies, selectMoviesLoading } from '../../store/movies.selectors';
+import { MoviesFacade } from '../../store/movies.facade';
 
 @Component({
   selector: 'app-home',
@@ -16,21 +18,13 @@ import { MoviesService } from '../../movies.service';
   styleUrl: './home.component.scss'
 })
 export class HomeComponent implements OnInit {
-  public moviesLoading$!: Observable<boolean>;
-  private store = inject(Store);
-  public movies$!: Observable<Movie[]>;
   private router = inject(Router);
-  private movieService = inject(MoviesService);
-
-  constructor() {
-    this.movies$ = this.store.select(state => state.appState.movies);
-  }
+  private moviesFacade = inject(MoviesFacade);
+  movies$ = this.moviesFacade.allMovies$;
+  moviesLoading$ = this.moviesFacade.moviesLoading$;
 
   ngOnInit(): void {
-    this.store.dispatch(startFetchingMovies());
-    this.moviesLoading$ = this.store.select(state => state.appState.fetchingMovies);
-    this.movieService.fetchSingleMovie(2).subscribe(res => console.log(res))
-    this.movieService.fetchSingleMovieObs(2).subscribe(res => console.log(res));
+    this.moviesFacade.loadMovies();
   }
 
     fetchSingleMovie(url: string | undefined) {
